@@ -28,9 +28,9 @@ Template.map.onCreated(function() {
                     position: myLatlng,
                     map: map.instance
                     });
+
+
           
           });
-
-
   });
 });
