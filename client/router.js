@@ -11,6 +11,10 @@ Router.route('/about', function(){
 	this.render('about');
 });
 
+Router.route('/:_id',function(){
+	console.log(this.params.someParameter);
+});
+
 Router.onBeforeAction(function() {
   GoogleMaps.load();
   this.next();
