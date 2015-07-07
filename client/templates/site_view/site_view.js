@@ -21,7 +21,8 @@ site_view_map_options: function() {
       return {
         center: new google.maps.LatLng(site_doc.Lat, site_doc.Lon),
         zoom: site_doc.mapzoom,
-        mapTypeId: google.maps.MapTypeId.SATELLITE
+        mapTypeId: google.maps.MapTypeId.SATELLITE,
+        tilt: 45
       };
 
 
