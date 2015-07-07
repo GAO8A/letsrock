@@ -1,23 +1,34 @@
-Sites = new Mongo.Collection("sites");
+//Sites = new Mongo.Collection("sites");
 
 Meteor.subscribe("sites");
 
 var marker = {};
 
+var styles = [
+  {
+    "elementType": "labels.text",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  }
+];
+
 Template.map.helpers({
-  MapOptions: function() {
+  main_map_options: function() {
     // Make sure the maps API has loaded
     if (GoogleMaps.loaded()) {
       // Map initialization options
 
       return {
         center: new google.maps.LatLng(43.746174, -79.386412),
-        zoom: 5
+        zoom: 7,
+        disableDefaultUI: true,
+        styles: styles
       };
 
 
     }
-  },
+  }
 
 });
 
@@ -26,21 +37,22 @@ Template.map.onCreated(function() {
 
   
 
-  GoogleMaps.ready('sitemap', function(map) {
+  GoogleMaps.ready('main_map', function(map) {
 
    
-    console.log('Map ready');
+    console.log('Main Map ready');
 
 
 
-    // Adds a info window
+    // Adds a InfoWindow
     Sites.find().forEach(function(info){
 
+      var id = info.siteID;
 
       var infowindow = new google.maps.InfoWindow({ 
           content: 
             ['<span class="InfoWindow">',
-            '<h3>' + info.siteID.toUpperCase() + '</h3>',
+            '<h3>' + id.toUpperCase() + '</h3>',
             '<span>' + info.SiteName + '</span>',
             '</span>'].join('')
         });
@@ -52,12 +64,19 @@ Template.map.onCreated(function() {
                     map: map.instance
                     });
 
+      // Adding Hover listener for Tooltip (InfoWindow)
       marker.addListener('mouseover',function(){
         infowindow.open(map.instance, marker);
       });
 
       marker.addListener('mouseout',function(){
         infowindow.close();
+      });
+
+
+      // Double click handler to go to the site.
+      marker.addListener('dblclick',function(){
+         Router.go('/'+id);
       });
 
 

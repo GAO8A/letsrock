@@ -1,3 +1,11 @@
 nav.navbar {
 	margin-bottom:0;
 }
+
+.navbar-fixed-top {
+	position:absolute;
+}
+
+form {
+margin:0 0 0 18px
+}
