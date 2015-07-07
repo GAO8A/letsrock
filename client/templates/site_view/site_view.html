@@ -1,0 +1,38 @@
+<template name="site_view">
+
+
+<div class="row">
+  <div class="col-md-8 col-xs-12">
+    
+
+    <div class="SiteViewMapContainer">
+      {{> googleMap name="site_view_map" options= site_view_map_options}}
+    </div>
+    
+
+  </div>
+  
+
+  <div class="col-md-4 ">
+
+    <div class="SiteViewInfoContainer">
+  
+      <h1> {{siteID}} </h1> <h2>{{SiteName}}</h2>
+
+      <span class="ImageContainer">
+        
+
+      </span>
+
+      <p>{{Desc}}</p>
+
+    </div>
+    
+
+  </div>
+  
+</div>
+
+
+
+</template>
