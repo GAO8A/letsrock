@@ -5,18 +5,27 @@ Meteor.subscribe("sites");
 
 // Site View Helper
 Template.site_view.helpers({
+// get_url: function(){
+//     var id = Router.current().params._site;
+//     // gets the url :_site  
+//     var site_doc = Sites.findOne({siteID: id});
+//     console.log(site_doc.Lat);
 
+//     return Session.set({lat: site_doc.Lat, lng: site_doc.Lon});
+
+// },
 site_view_map_options: function() {
 
 	  var id = Router.current().params._site;
-	  // gets the url :_site
+	  // // gets the url :_site
       
-      var site_doc = Sites.findOne({siteID: id});
+    var site_doc = Sites.findOne({siteID: id});
       // retrieves entire document that for the respective id
 
     // Makes sure the maps API has loaded
     if (GoogleMaps.loaded()) {
       // Map initialization options
+
 
       return {
         center: new google.maps.LatLng(site_doc.Lat, site_doc.Lon),
@@ -29,9 +38,6 @@ site_view_map_options: function() {
     }
    
   }
-// ,new_site:function(){
-// 	return Session.get("new_site");
-// }
 
 // ,dictionary: function(desc){
 
